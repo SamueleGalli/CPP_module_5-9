@@ -12,12 +12,35 @@ Bureaucrat::~Bureaucrat()
 
 void        Bureaucrat::Increment_Grade(int increment)
 {
-    this->grade = this->grade - increment;
+    int     grade1 = this->grade - increment;
+    try 
+    {
+        if (grade1 < 1)
+            throw std::exception();
+        else
+            this->grade = this->grade - increment;
+    }
+    catch (std::exception &e)
+    {
+        std::cout << "Error it must not be minor of 1" << std::endl;
+    }
 }
 
 void        Bureaucrat::Decrement_Grade(int decrement)
 {
-    this->grade = this->grade + decrement;
+    int     grade1 = this->grade + decrement;
+    try
+    {
+        if (grade1 > 150)
+            throw std::exception();
+        else
+            this->grade = this->grade + decrement;
+
+    }
+    catch (std::exception &e)
+    {
+        std::cout << "Error it must not be major of 150" << std::endl;
+    }
 }
 
 std::string Bureaucrat::getName(void)
@@ -32,6 +55,6 @@ int Bureaucrat::getGrade(void)
 
 std::ostream    &operator<<(std::ostream &out, Bureaucrat &B)
 {
-    out << "<" << B.getName() << ">, bureaucrat grade " << B.getGrade();
+    out << B.getName() << ", bureaucrat grade " << B.getGrade();
     return out;
 }
