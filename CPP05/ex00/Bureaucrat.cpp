@@ -22,8 +22,13 @@ void        Bureaucrat::Increment_Grade(int increment)
     }
     catch (std::exception &e)
     {
-        std::cout << "Error it must not be minor of 1" << std::endl;
+        GradeTooHighException();
     }
+}
+
+void      GradeTooHighException(void)
+{
+    std::cout << Error it must not be minor of 1 << std::endl;
 }
 
 void        Bureaucrat::Decrement_Grade(int decrement)
@@ -39,8 +44,13 @@ void        Bureaucrat::Decrement_Grade(int decrement)
     }
     catch (std::exception &e)
     {
-        std::cout << "Error it must not be major of 150" << std::endl;
+        GradeTooLowException();
     }
+}
+
+void    GradeTooLowException(void)
+{
+    std::cout << Error it must not be major of 150 << std::endl;
 }
 
 std::string Bureaucrat::getName(void)

@@ -14,6 +14,9 @@ class Bureaucrat
         void        Increment_Grade(int increment);
         void        Decrement_Grade(int decrement);
 
+        char *       GradeTooHighException(void);
+        char *       GradeTooLowException(void);
+
         std::string getName(void);
         int         getGrade(void);
 
