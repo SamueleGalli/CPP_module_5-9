@@ -6,27 +6,19 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 10:16:51 by sgalli            #+#    #+#             */
-/*   Updated: 2024/04/01 19:31:48 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/04/01 19:31:03 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
 
 int main()
 {
     Bureaucrat B(100, "Bill");
-
-    /*std::cout << B << std::endl;
-    std::cout << "--------------------------" << std::endl;
-    B.Increment_Grade(99);
-    std::cout << "--------------------------" << std::endl;
-    std::cout << B << std::endl;
-    std::cout << "--------------------------" << std::endl;
-    B.Decrement_Grade(149);
-    std::cout << "--------------------------" << std::endl;
-    std::cout << B << std::endl;
-    std::cout << "--------------------------" << std::endl;
-    */
+    Form F("ASIA", 50, 50);
+    
+    //Bureaucrat
     std::cout << B << std::endl;
     std::cout << "--------------------------" << std::endl;
     B.Increment_Grade(200);
@@ -36,4 +28,16 @@ int main()
     B.Decrement_Grade(170);
     std::cout << "--------------------------" << std::endl;
     std::cout << B << std::endl;
+    //Form
+    std::cout << "--------------------------" << std::endl;
+    B.signForm(F);
+    B.Increment_Grade(50);
+    std::cout << "--------------------------" << std::endl;
+    std::cout << B << std::endl;
+    std::cout << "--------------------------" << std::endl;
+    F.beSigned(B);
+    std::cout << "--------------------------" << std::endl;
+    B.signForm(F);
+    std::cout << "--------------------------" << std::endl;
+    F.beSigned(B);
 }
