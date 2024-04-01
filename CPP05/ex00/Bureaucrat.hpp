@@ -6,23 +6,24 @@
 class Bureaucrat
 {
     private:
-        std::string name;
-        int         grade;
+        char const *name;
+        int        grade;
     public:
-        Bureaucrat(int grade, std::string name);
-
+        //constructor
+        Bureaucrat(int grade_b, char const *name_b);
+        //method inc and dec
         void        Increment_Grade(int increment);
         void        Decrement_Grade(int decrement);
-
-        char *       GradeTooHighException(void);
-        char *       GradeTooLowException(void);
-
-        std::string getName(void);
-        int         getGrade(void);
-
+        //exception
+        void        GradeTooHighException(void);
+        void        GradeTooLowException(void);
+        //getter
+        char const    *getName(void);
+        int     getGrade(void);
+        //overload operator print
         friend  std::ostream    &operator<<(std::ostream &out, Bureaucrat &B);
+        //destructor
         ~Bureaucrat();
-
 };
 
 #endif

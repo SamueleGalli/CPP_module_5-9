@@ -1,15 +1,13 @@
 #include "Bureaucrat.hpp"
 
-Bureaucrat::Bureaucrat(int grade, std::string name)
+//constructor
+Bureaucrat::Bureaucrat(int grade_b, char const *name_b)
 {
-    this->name = name;
-    this->grade = grade;
+    this->name = name_b;
+    this->grade = grade_b;
 }
 
-Bureaucrat::~Bureaucrat()
-{
-}
-
+//method inc and dec
 void        Bureaucrat::Increment_Grade(int increment)
 {
     int     grade1 = this->grade - increment;
@@ -24,11 +22,6 @@ void        Bureaucrat::Increment_Grade(int increment)
     {
         GradeTooHighException();
     }
-}
-
-void      GradeTooHighException(void)
-{
-    std::cout << Error it must not be minor of 1 << std::endl;
 }
 
 void        Bureaucrat::Decrement_Grade(int decrement)
@@ -48,14 +41,21 @@ void        Bureaucrat::Decrement_Grade(int decrement)
     }
 }
 
-void    GradeTooLowException(void)
+//exception
+void      Bureaucrat::GradeTooHighException(void)
 {
-    std::cout << Error it must not be major of 150 << std::endl;
+    std::cout << "Error it must not be minor of 1" << std::endl;
 }
 
-std::string Bureaucrat::getName(void)
+void    Bureaucrat::GradeTooLowException()
 {
-    return (name);
+    std::cout << "Error it must not be major of 150" << std::endl;
+}
+
+//getter
+char const *Bureaucrat::getName(void)
+{
+    return (this->name);
 }
 
 int Bureaucrat::getGrade(void)
@@ -63,8 +63,14 @@ int Bureaucrat::getGrade(void)
     return (grade);
 }
 
+//overload operator print
 std::ostream    &operator<<(std::ostream &out, Bureaucrat &B)
 {
     out << B.getName() << ", bureaucrat grade " << B.getGrade();
     return out;
+}
+
+//destructor
+Bureaucrat::~Bureaucrat()
+{
 }
