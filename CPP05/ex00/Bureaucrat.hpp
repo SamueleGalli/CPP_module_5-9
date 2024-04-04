@@ -20,10 +20,10 @@ class Bureaucrat
         //getter
         char const    *getName(void);
         int     getGrade(void);
-        //overload operator print
-        friend  std::ostream    &operator<<(std::ostream &out, Bureaucrat &B);
         //destructor
         ~Bureaucrat();
 };
+//overload operator print
+std::ostream    &operator<<(std::ostream &out, Bureaucrat &B);
 
 #endif
