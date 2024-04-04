@@ -29,13 +29,13 @@ class Bureaucrat
         char const *getName(void);
         int         getGrade(void);
 
-        //print Bureaucrat
-        friend  std::ostream    &operator<<(std::ostream &out, Bureaucrat &B);
         //show form
         void signForm(Form &f);
         //costructor
         ~Bureaucrat();
 
 };
+//print Bureaucrat
+std::ostream    &operator<<(std::ostream &out, Bureaucrat &B);
 
 #endif
