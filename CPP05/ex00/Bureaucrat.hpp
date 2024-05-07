@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include <cstdlib>
 class Bureaucrat
 {
     private:
@@ -11,15 +12,27 @@ class Bureaucrat
     public:
         //constructor
         Bureaucrat(int grade_b, char const *name_b);
+        Bureaucrat();
+
+        //copy constructor
+        Bureaucrat(Bureaucrat const &copy);
+
+        //copy assignment operator
+        Bureaucrat  &operator=(Bureaucrat const &B);
+
         //method inc and dec
         void        Increment_Grade(int increment);
         void        Decrement_Grade(int decrement);
+
         //exception
         void        GradeTooHighException(void);
         void        GradeTooLowException(void);
+
         //getter
         char const    *getName(void);
+
         int     getGrade(void);
+
         //destructor
         ~Bureaucrat();
 };

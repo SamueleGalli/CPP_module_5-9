@@ -7,10 +7,37 @@ Bureaucrat::Bureaucrat()
 }
 
 Bureaucrat::Bureaucrat(int grade_b, char const *name_b)
-: name(name_b), grade(grade_b)
 {
+    if (grade_b < 1)
+    {
+        std::cout << "too high grade" << std::endl;
+        exit (1);
+    }
+    if (grade_b > 150)
+    {
+        std::cout << "too low grade" << std::endl;
+        exit (1);
+    }
     this->name = name_b;
     this->grade = grade_b;
+}
+
+//copy constructor
+Bureaucrat::Bureaucrat(Bureaucrat const &copy)
+{
+    if (this != &copy)
+        *this = copy;
+}
+
+//copy assignment operator
+Bureaucrat  &Bureaucrat::operator=(Bureaucrat const &B)
+{
+    if (this != &B)
+    {
+        this->grade = B.grade;
+        this->name = B.name;
+    }
+    return (*this);
 }
 
 //inc and dec
@@ -53,7 +80,6 @@ void      Bureaucrat::GradeTooHighException(void)
 {
     std::cout << "Error: (invalid increment)=\"higher than 1\"" << std::endl;
 }
-
 
 void    Bureaucrat::GradeTooLowException()
 {

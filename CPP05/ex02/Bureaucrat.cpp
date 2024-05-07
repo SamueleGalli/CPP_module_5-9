@@ -1,6 +1,11 @@
 #include "Bureaucrat.hpp"
 
 //constructor
+
+Bureaucrat::Bureaucrat()
+{
+}
+
 Bureaucrat::Bureaucrat(int grade_b, char const *name_b)
 {
     if (grade_b < 1)
@@ -15,10 +20,6 @@ Bureaucrat::Bureaucrat(int grade_b, char const *name_b)
     }
     this->name = name_b;
     this->grade = grade_b;
-}
-
-Bureaucrat::Bureaucrat(void)
-{
 }
 
 //copy constructor
@@ -39,7 +40,8 @@ Bureaucrat  &Bureaucrat::operator=(Bureaucrat const &B)
     return (*this);
 }
 
-//method inc and dec
+//inc and dec
+
 void        Bureaucrat::Increment_Grade(int increment)
 {
     int     grade1 = this->grade - increment;
@@ -77,8 +79,8 @@ void        Bureaucrat::Decrement_Grade(int decrement)
 void      Bureaucrat::GradeTooHighException(void)
 {
     std::cout << "Error: (invalid increment)=\"higher than 1\"" << std::endl;
-
 }
+
 
 void    Bureaucrat::GradeTooLowException()
 {
@@ -88,13 +90,14 @@ void    Bureaucrat::GradeTooLowException()
 //getter
 char const *Bureaucrat::getName(void)
 {
-    return (this->name);
+    return (name);
 }
 
 int Bureaucrat::getGrade(void)
 {
     return (grade);
 }
+
 
 //overload operator print
 std::ostream    &operator<<(std::ostream &out, Bureaucrat &B)
@@ -103,7 +106,20 @@ std::ostream    &operator<<(std::ostream &out, Bureaucrat &B)
     return out;
 }
 
+//show form
+void    Bureaucrat::signForm(Form &f)
+{
+    std::cout << "|Form : (" << f.getName() << ")|" << std::endl;
+    if (f.getSign() == true)
+        std::cout << "|Sign : (is signed" << ")|" << std::endl;
+    else
+        std::cout << "|Sign : (is not signed" << ")|" << std::endl;
+    std::cout << "|Grade to sign : ("  << f.getGradeToSign() << ")|" << std::endl;
+    std::cout << "|Grade to execute : (" << f.getGradeToExecute() << ")|" << std::endl;
+}
+
 //destructor
+
 Bureaucrat::~Bureaucrat()
 {
 }
