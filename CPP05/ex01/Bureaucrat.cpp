@@ -42,15 +42,16 @@ Bureaucrat  &Bureaucrat::operator=(Bureaucrat const &B)
 
 //inc and dec
 
-void        Bureaucrat::Increment_Grade(int increment)
-{
-    int     grade1 = this->grade - increment;
+void        Bureaucrat::Increment_Grade()
+{  
+    this->grade--;
     try 
     {
-        if (grade1 < 1)
+        if (this->grade < 1)
+        {
+            this->grade++;
             throw std::exception();
-        else
-            this->grade = this->grade - increment;
+        }
     }
     catch (std::exception &e)
     {
@@ -58,16 +59,16 @@ void        Bureaucrat::Increment_Grade(int increment)
     }
 }
 
-void        Bureaucrat::Decrement_Grade(int decrement)
+void        Bureaucrat::Decrement_Grade()
 {
-    int     grade1 = this->grade + decrement;
+    this->grade++;
     try
     {
-        if (grade1 > 150)
+        if (this->grade > 150)
+        {
+            this->grade--;
             throw std::exception();
-        else
-            this->grade = this->grade + decrement;
-
+        }
     }
     catch (std::exception &e)
     {
@@ -108,6 +109,11 @@ std::ostream    &operator<<(std::ostream &out, Bureaucrat &B)
 //show form
 void    Bureaucrat::signForm(Form &f)
 {
+    if (f.getGradeToSign() > 150 || f.getGradeToSign() < 1 || f.getGradeToExecute() > 150 || f.getGradeToExecute() < 1)
+    {
+        std::cout << "invalid Form value to be shown" << std::endl;
+        return ;
+    }
     std::cout << "|Form : (" << f.getName() << ")|" << std::endl;
     if (f.getSign() == true)
         std::cout << "|Sign : (is signed" << ")|" << std::endl;

@@ -40,15 +40,16 @@ Bureaucrat  &Bureaucrat::operator=(Bureaucrat const &B)
 }
 
 //method inc and dec
-void        Bureaucrat::Increment_Grade(int increment)
-{
-    int     grade1 = this->grade - increment;
+void        Bureaucrat::Increment_Grade()
+{  
+    this->grade--;
     try 
     {
-        if (grade1 < 1)
+        if (this->grade < 1)
+        {
+            this->grade++;
             throw std::exception();
-        else
-            this->grade = this->grade - increment;
+        }
     }
     catch (std::exception &e)
     {
@@ -56,16 +57,16 @@ void        Bureaucrat::Increment_Grade(int increment)
     }
 }
 
-void        Bureaucrat::Decrement_Grade(int decrement)
+void        Bureaucrat::Decrement_Grade()
 {
-    int     grade1 = this->grade + decrement;
+    this->grade++;
     try
     {
-        if (grade1 > 150)
+        if (this->grade > 150)
+        {
+            this->grade--;
             throw std::exception();
-        else
-            this->grade = this->grade + decrement;
-
+        }
     }
     catch (std::exception &e)
     {
@@ -77,7 +78,6 @@ void        Bureaucrat::Decrement_Grade(int decrement)
 void      Bureaucrat::GradeTooHighException(void)
 {
     std::cout << "Error: (invalid increment)=\"higher than 1\"" << std::endl;
-
 }
 
 void    Bureaucrat::GradeTooLowException()

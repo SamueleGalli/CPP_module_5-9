@@ -42,15 +42,15 @@ Bureaucrat  &Bureaucrat::operator=(Bureaucrat const &B)
 
 //inc and dec
 
-void        Bureaucrat::Increment_Grade(int increment)
+void        Bureaucrat::Increment_Grade()
 {
-    int     grade1 = this->grade - increment;
+    int     grade1 = this->grade--;
     try 
     {
         if (grade1 < 1)
             throw std::exception();
         else
-            this->grade = this->grade - increment;
+            this->grade--;
     }
     catch (std::exception &e)
     {
@@ -58,15 +58,15 @@ void        Bureaucrat::Increment_Grade(int increment)
     }
 }
 
-void        Bureaucrat::Decrement_Grade(int decrement)
+void        Bureaucrat::Decrement_Grade()
 {
-    int     grade1 = this->grade + decrement;
+    int     grade1 = this->grade++;
     try
     {
         if (grade1 > 150)
             throw std::exception();
         else
-            this->grade = this->grade + decrement;
+            this->grade++;
 
     }
     catch (std::exception &e)
@@ -75,12 +75,28 @@ void        Bureaucrat::Decrement_Grade(int decrement)
     }
 }
 
+//show form
+void    Bureaucrat::signForm(AForm &f)
+{
+    if (f.getGradeToSign() > 150 || f.getGradeToSign() < 1 || f.getGradeToExecute() > 150 || f.getGradeToExecute() < 1)
+    {
+        std::cout << "invalid Form value to be shown" << std::endl;
+        return ;
+    }
+    std::cout << "|Form : (" << f.getName() << ")|" << std::endl;
+    if (f.getSign() == true)
+        std::cout << "|Sign : (is signed" << ")|" << std::endl;
+    else
+        std::cout << "|Sign : (is not signed" << ")|" << std::endl;
+    std::cout << "|Grade to sign : ("  << f.getGradeToSign() << ")|" << std::endl;
+    std::cout << "|Grade to execute : (" << f.getGradeToExecute() << ")|" << std::endl;
+}
+
 //exception
 void      Bureaucrat::GradeTooHighException(void)
 {
     std::cout << "Error: (invalid increment)=\"higher than 1\"" << std::endl;
 }
-
 
 void    Bureaucrat::GradeTooLowException()
 {
@@ -93,7 +109,7 @@ char const *Bureaucrat::getName(void)
     return (name);
 }
 
-int Bureaucrat::getGrade(void)
+int Bureaucrat::getGrade(void) const
 {
     return (grade);
 }
@@ -104,18 +120,6 @@ std::ostream    &operator<<(std::ostream &out, Bureaucrat &B)
 {
     out << B.getName() << ", bureaucrat grade " << B.getGrade();
     return out;
-}
-
-//show form
-void    Bureaucrat::signForm(Form &f)
-{
-    std::cout << "|Form : (" << f.getName() << ")|" << std::endl;
-    if (f.getSign() == true)
-        std::cout << "|Sign : (is signed" << ")|" << std::endl;
-    else
-        std::cout << "|Sign : (is not signed" << ")|" << std::endl;
-    std::cout << "|Grade to sign : ("  << f.getGradeToSign() << ")|" << std::endl;
-    std::cout << "|Grade to execute : (" << f.getGradeToExecute() << ")|" << std::endl;
 }
 
 //destructor

@@ -21,8 +21,8 @@ class Bureaucrat
         Bureaucrat  &operator=(Bureaucrat const &B);
 
         //method inc and dec
-        void        Increment_Grade(int increment);
-        void        Decrement_Grade(int decrement);
+        void        Increment_Grade();
+        void        Decrement_Grade();
 
         //exception
         void        GradeTooHighException(void);

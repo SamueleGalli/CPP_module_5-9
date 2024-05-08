@@ -64,6 +64,11 @@ void    Form::GradeTooLowException()
 
 void Form::beSigned(Bureaucrat &b)
 {
+    if (this->grade_to_sign > 150 || this->grade_to_sign < 1 || this->grade_to_execute > 150 || this->grade_to_execute < 1)
+    {
+        std::cout << "Invalid: grade Form cannot be compiled" << std::endl;
+        return ;
+    }
     if (b.getGrade() <= this->grade_to_sign)
     {
         if (this->sign == false)

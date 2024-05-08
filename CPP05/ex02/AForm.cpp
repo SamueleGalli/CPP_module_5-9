@@ -1,8 +1,8 @@
-#include "Form.hpp"
+#include "AForm.hpp"
 
 //constructor
 
-Form::Form(char const *name_form, const int grade_sign, const int grade_ex)
+AForm::AForm(char const *name_form, const int grade_sign, const int grade_ex)
 : sign(false), grade_to_sign(grade_sign), grade_to_execute(grade_ex), name(name_form)
 {
     try
@@ -25,12 +25,35 @@ Form::Form(char const *name_form, const int grade_sign, const int grade_ex)
     }
 }
 
-Form::Form(void)
+//executing form
+void    AForm::execute(Bureaucrat const & executor) const
+{
+    try
+    {
+        if (executor.getGrade() > this->grade_to_sign)
+            throw std::exception();
+    }
+    catch (std::exception &e)
+    {
+        GradeTooLowException();
+    }
+    try
+    {
+        if (this->sign == false)
+            throw std::exception();
+    }
+    catch (std::exception &e)
+    {
+        InvalidSignException();
+    }
+}
+
+AForm::AForm(void)
 : sign(false), grade_to_sign(1), grade_to_execute(1), name("default")
 {
 }
 //copy constructor
-Form::Form(Form const &copy)
+AForm::AForm(AForm const &copy)
 : sign(copy.sign),
   grade_to_sign(copy.grade_to_sign),
   grade_to_execute(copy.grade_to_execute),
@@ -39,7 +62,7 @@ Form::Form(Form const &copy)
 }
 
 //copy assignment operator
-Form  &Form::operator=(Form const &f)
+AForm  &AForm::operator=(AForm const &f)
 {
     if (this != &f)
     {
@@ -50,20 +73,30 @@ Form  &Form::operator=(Form const &f)
 }
 
 //exeception
-void      Form::GradeTooHighException(void)
+void      AForm::GradeTooHighException(void) const
 {
     std::cout << "Error it must not be minor of 1" << std::endl;
 }
 
-void    Form::GradeTooLowException()
+void    AForm::GradeTooLowException(void) const
 {
     std::cout << "Error it must not be major of 150" << std::endl;
 }
 
+void    AForm::InvalidSignException(void) const
+{
+    std::cout << "Error: already signed" << std::endl;
+}
+
 //sign
 
-void Form::beSigned(Bureaucrat &b)
+void AForm::beSigned(Bureaucrat &b) const
 {
+    if (this->grade_to_sign > 150 || this->grade_to_sign < 1 || this->grade_to_execute > 150 || this->grade_to_execute < 1)
+    {
+        std::cout << "Invalid: grade Form cannot be compiled" << std::endl;
+        return ;
+    }
     if (b.getGrade() <= this->grade_to_sign)
     {
         if (this->sign == false)
@@ -78,32 +111,31 @@ void Form::beSigned(Bureaucrat &b)
         std::cout << "Invalid: grade insufficient" << std::endl;
 }
 
-
 //getting
 
-char const    *Form::getName(void) const
+char const    *AForm::getName(void) const
 {
     return (this->name);
 }
 
-bool    Form::getSign(void) const
+bool    AForm::getSign(void) const
 {
     return (this->sign);
 }
 
 
-int   Form::getGradeToSign(void) const
+int   AForm::getGradeToSign(void) const
 {
     return (this->grade_to_sign);
 }
 
-int   Form::getGradeToExecute(void) const
+int   AForm::getGradeToExecute(void) const
 {
     return (this->grade_to_execute);
 }
 
 //decostructor
 
-Form::~Form()
+AForm::~AForm()
 {
 }

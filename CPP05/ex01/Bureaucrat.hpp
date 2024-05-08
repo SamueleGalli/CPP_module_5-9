@@ -21,8 +21,8 @@ class Bureaucrat
         //copy constructor
         Bureaucrat(Bureaucrat const &copy);
         //method inc and dec
-        void        Increment_Grade(int increment);
-        void        Decrement_Grade(int decrement);
+        void        Increment_Grade();
+        void        Decrement_Grade();
 
         //copy assignment operator
         Bureaucrat  &operator=(Bureaucrat const &B);

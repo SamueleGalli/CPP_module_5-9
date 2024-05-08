@@ -2,9 +2,9 @@ C++ = c++
 
 C++FLAGS = -g -Wall -Werror -Wextra -std=c++98
 
-NAME = Form_up,maggots!
+NAME = No, you need form 28B, not 28C...
 
-SRC = main.cpp Bureaucrat.cpp Form.cpp
+SRC = main.cpp Bureaucrat.cpp AForm.cpp ShrubberyCreationForm.cpp RobotomyRequestForm.cpp PresidentialPardonForm.cpp
 
 HEADERS = Bureaucrat.hpp
 

@@ -1,35 +1,37 @@
-#ifndef FORM_HPP
-#define FORM_HPP
+#ifndef AFORM_HPP
+#define AFORM_HPP
 
 #include "Bureaucrat.hpp"
 #include <stdexcept>
 
 class Bureaucrat;
 
-class Form
+class AForm
 {
     private:
-        bool        sign;
+        mutable bool        sign;
         const int   grade_to_sign;
         const int   grade_to_execute;
         char const  *name;
     public:
         //constructor
-        Form(void);
-        Form(char const *name_form, const int grade_sign, const int grade_ex);
+        AForm(void);
+        AForm(char const *name_form, const int grade_sign, const int grade_ex);
         
         //copy constructor
-        Form(Form const &copy);
+        AForm(AForm const &copy);
 
         //copy assignment operator
-        Form  &operator=(Form const &f);
+        AForm  &operator=(AForm const &f);
 
         //exception
-        void    GradeTooHighException(void);
-        void    GradeTooLowException(void);
+        void    GradeTooHighException(void) const;
+        void    GradeTooLowException(void) const;
+        void    InvalidSignException(void) const;
+
         
         //sign
-        void    beSigned(Bureaucrat &b);
+        void  beSigned(Bureaucrat &b) const;
         
         //getting
         char const  *getName(void) const;
@@ -39,8 +41,11 @@ class Form
         int         getGradeToSign(void) const;
         int         getGradeToExecute(void) const;
 
+        //execute the form
+        virtual void    execute(Bureaucrat const & executor) const = 0;
+
         //destructor
-        ~Form();
+        ~AForm();
 };
 
 #endif
