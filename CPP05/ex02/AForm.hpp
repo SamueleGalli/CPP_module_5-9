@@ -3,6 +3,9 @@
 
 #include "Bureaucrat.hpp"
 #include <stdexcept>
+#include <cstdlib>
+#include <iostream>
+#include <ctime>
 
 class Bureaucrat;
 
@@ -25,6 +28,7 @@ class AForm
         AForm  &operator=(AForm const &f);
 
         //exception
+        void    InvalidGradeException(void) const;
         void    GradeTooHighException(void) const;
         void    GradeTooLowException(void) const;
         void    InvalidSignException(void) const;

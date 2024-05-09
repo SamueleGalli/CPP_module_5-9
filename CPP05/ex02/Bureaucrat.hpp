@@ -16,7 +16,7 @@ class Bureaucrat
     public:
         //constructor
         Bureaucrat(void);
-        Bureaucrat(int grade_b, char const *name_b);
+        Bureaucrat(char const *name_b, int grade_b);
         
         //copy constructor
         Bureaucrat(Bureaucrat const &copy);

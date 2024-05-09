@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 10:16:51 by sgalli            #+#    #+#             */
-/*   Updated: 2024/05/08 14:26:45 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/05/09 13:53:05 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 int main()
 {
     //Bureaucrat
-    Bureaucrat B(49, "Bill");
+    Bureaucrat B("Bill", 49);
     //Form
     Form F("ASIA", -50, -50);
     Form F1("AMERICA", 300, 300);

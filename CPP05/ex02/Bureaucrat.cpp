@@ -6,7 +6,7 @@ Bureaucrat::Bureaucrat()
 {
 }
 
-Bureaucrat::Bureaucrat(int grade_b, char const *name_b)
+Bureaucrat::Bureaucrat(char const *name_b, int grade_b)
 {
     if (grade_b < 1)
     {
@@ -114,6 +114,17 @@ int Bureaucrat::getGrade(void) const
     return (grade);
 }
 
+//execute Form
+void Bureaucrat::executeForm(const AForm &form)
+{
+    if (form.getSign() == false || this->getGrade() > form.getGradeToExecute())
+        std::cout << this->name << " cannot execute " << form.getName() << std::endl;
+    else
+    {
+        form.execute(*this);
+        std::cout << this->name << " execute " << form.getName() << std::endl;
+    }
+}
 
 //overload operator print
 std::ostream    &operator<<(std::ostream &out, Bureaucrat &B)

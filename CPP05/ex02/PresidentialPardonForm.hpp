@@ -2,25 +2,27 @@
 #define PRESIDENTIALPARDONFORM_HPP
 
 #include "AForm.hpp"
-class   PresidentialPardonForm
+
+class   PresidentialPardonForm : public AForm
 {
     private:
-        std::string     target;
+        char const *target;
     public:
     //constructor
     PresidentialPardonForm();
 
-    //target for working directory
-    PresidentialPardonForm(std::string target);
     //copy constructor
     PresidentialPardonForm(PresidentialPardonForm const &copy);
+
+    //target for RobotomyRequestForm
+    PresidentialPardonForm(char const *target);
 
     //copy assignment operator
     PresidentialPardonForm   &operator=(PresidentialPardonForm const &ppf);
 
     //execute form
     //pardoning by Zaphof Beeblebrox    
-    virtual void    execute(Bureaucrat const & executor) const;    //destructor
+    virtual void    execute(Bureaucrat const & executor) const;
     //destructor
     ~PresidentialPardonForm();
 };

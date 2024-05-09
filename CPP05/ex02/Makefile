@@ -2,7 +2,7 @@ C++ = c++
 
 C++FLAGS = -g -Wall -Werror -Wextra -std=c++98
 
-NAME = No, you need form 28B, not 28C...
+NAME = No,you_need_form_28B,not_28C...
 
 SRC = main.cpp Bureaucrat.cpp AForm.cpp ShrubberyCreationForm.cpp RobotomyRequestForm.cpp PresidentialPardonForm.cpp
 

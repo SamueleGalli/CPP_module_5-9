@@ -1,23 +1,19 @@
 #include "PresidentialPardonForm.hpp"
 
 //constructor
-PresidentialPardonForm::PresidentialPardonForm() : AForm("Default", 25, 5)
+PresidentialPardonForm::PresidentialPardonForm() : AForm("PresidentialPardonForm", 25, 5), target("PresidentialPardonForm")
 {
 }
 
 //copy constructor
-PresidentialPardonForm::PresidentialPardonForm(PresidentialPardonForm const &copy)
+PresidentialPardonForm::PresidentialPardonForm(PresidentialPardonForm const &copy) : AForm(copy), target(copy.target)
 {
-    if (this != &copy)
-        *this = copy;
 }
 
-// target for working directory
-PresidentialPardonForm::PresidentialPardonForm(std::string target)
+//target for PresidentialPardonForm
+PresidentialPardonForm::PresidentialPardonForm(char const *target) : AForm(target, 25, 5), target(target)
 {
-    this->target = target;
 }
-
 
 //copy assignment operator
 PresidentialPardonForm   &PresidentialPardonForm::operator=(PresidentialPardonForm const &ppf)
@@ -28,10 +24,19 @@ PresidentialPardonForm   &PresidentialPardonForm::operator=(PresidentialPardonFo
 
 //execute form
 //pardoning by Zaphof Beeblebrox
-void    PresidentialPardonForm::execute(std::string target)
+void    PresidentialPardonForm::execute(Bureaucrat const & executor) const
 {
-    if (AForm.GetGradeToSign() == 25 && AForm.GetGradeToExecute() == 5)
-        std::cout << target << " \"has been pardoned by Zaphod Beeblebrox\"" << std::endl;
+    if (executor.getGrade() > AForm::getGradeToSign())
+    {
+        std::cout << "Error: invalid grade to sign" << std::endl;
+        return ;
+    }
+    else if (executor.getGrade() > AForm::getGradeToExecute())
+    {
+        std::cout << "Error: invalid grade to execute" << std::endl;
+        return ;
+    }
+    std::cout << this->target << " \"has been pardoned by Zaphod Beeblebrox\"" << std::endl;
 }
 
 //destructor

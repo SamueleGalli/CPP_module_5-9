@@ -1,38 +1,48 @@
 #include "RobotomyRequestForm.hpp"
 
 //constructor
-RobotomyRequestForm::RobotomyRequestForm() : Form("Default", 72, 45)
+RobotomyRequestForm::RobotomyRequestForm() : AForm("RobotomyRequestForm", 72, 45), target("RobotomyRequestForm")
 {
 }
 
 //copy constructor
-RobotomyRequestForm::RobotomyRequestForm(RobotomyRequestForm const &copy)
+RobotomyRequestForm::RobotomyRequestForm(RobotomyRequestForm const &copy): AForm(copy), target(copy.target)
 {
-    if (this != &copy)
-        *this = copy;
+}
+
+//target for PresidentialPardonForm
+RobotomyRequestForm::RobotomyRequestForm(char const *target) : AForm(target, 72, 45), target(target)
+{
 }
 
 //robotomizing
-void    RobotomyRequestForm::execute(std::string target)
+void    RobotomyRequestForm::execute(Bureaucrat const & executor) const
 {
-    std::cout << "DRILLING NOISES" << std::endl;
-    if (rand() % 2 == 0)
-        std::cout << target << " has been robotomized successfully" << std::endl;
+    if (executor.getGrade() > AForm::getGradeToSign())
+    {
+        std::cout << "Error: invalid grade to sign" << std::endl;
+        return ;
+    }
+    else if (executor.getGrade() > AForm::getGradeToExecute())
+    {
+        std::cout << "Error: invalid grade to execute" << std::endl;
+        return ;
+    }
+    srand(time(NULL)); //inizzializzatore numeri randomici
+    if (rand() % 2 == 0) //controllo se il numero e pari o dispari
+        std::cout << this->target << " è stata robotizzata con successo" << std::endl;
     else
-        std::cout << target << " robotomization failed" << std::endl;
+        std::cout << this->target << " la robotizzazione è fallita" << std::endl;
 }
 
 //copy assignment operator
 RobotomyRequestForm   &RobotomyRequestForm::operator=(RobotomyRequestForm const &rrf)
 {
-    if (this != &rrf)
-    {
-        AForm::operator=(rrf);
-    }
+    (void)rrf;
     return (*this);
 }
 
 // destructor
-~RobotomyRequestForm::RobotomyRequestForm()
+RobotomyRequestForm::~RobotomyRequestForm()
 {
 }

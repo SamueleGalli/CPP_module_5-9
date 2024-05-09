@@ -35,7 +35,7 @@ void    AForm::execute(Bureaucrat const & executor) const
     }
     catch (std::exception &e)
     {
-        GradeTooLowException();
+        InvalidGradeException();
     }
     try
     {
@@ -73,6 +73,12 @@ AForm  &AForm::operator=(AForm const &f)
 }
 
 //exeception
+
+void    AForm::InvalidGradeException(void) const
+{
+    std::cout << "grade insufficient for work" << std::endl;
+}
+
 void      AForm::GradeTooHighException(void) const
 {
     std::cout << "Error it must not be minor of 1" << std::endl;

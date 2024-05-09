@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 10:16:51 by sgalli            #+#    #+#             */
-/*   Updated: 2024/05/08 14:15:19 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/05/09 13:52:11 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 int main()
 {
     //Bureaucrat
-    //Bureaucrat invalid_B(0, "Bill");
-    //Bureaucrat invalid_B2(151, "Micheal");    
-    Bureaucrat B(2, "Bill");
-    Bureaucrat B2(150, "Micheal");
+    //Bureaucrat invalid_B("Bill", 0);
+    //Bureaucrat invalid_B2("Micheal", 151);    
+    Bureaucrat B("Bill", 2);
+    Bureaucrat B2("Micheal", 150);
 
     std::cout << B << std::endl;
     std::cout << "--------------------------" << std::endl;

@@ -6,7 +6,7 @@ Bureaucrat::Bureaucrat()
 {
 }
 
-Bureaucrat::Bureaucrat(int grade_b, char const *name_b)
+Bureaucrat::Bureaucrat(char const *name_b, int grade_b)
 {
     if (grade_b < 1)
     {
