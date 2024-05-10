@@ -2,9 +2,9 @@ C++ = c++
 
 C++FLAGS = -g -Wall -Werror -Wextra -std=c++98
 
-NAME = No,you_need_form_28B,not_28C...
+NAME = At_least_this_beats_coffee-making
 
-SRC = main.cpp Bureaucrat.cpp AForm.cpp ShrubberyCreationForm.cpp RobotomyRequestForm.cpp PresidentialPardonForm.cpp
+SRC = main.cpp Bureaucrat.cpp AForm.cpp ShrubberyCreationForm.cpp RobotomyRequestForm.cpp PresidentialPardonForm.cpp Intern.cpp
 
 HEADERS = Bureaucrat.hpp
 
