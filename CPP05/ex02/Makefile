@@ -4,7 +4,7 @@ C++FLAGS = -g -Wall -Werror -Wextra -std=c++98
 
 NAME = At_least_this_beats_coffee-machine
 
-SRC = main.cpp Bureaucrat.cpp AForm.cpp ShrubberyCreationForm.cpp RobotomyRequestForm.cpp PresidentialPardonForm.cpp Intern.cpp
+SRC = main.cpp Bureaucrat.cpp AForm.cpp ShrubberyCreationForm.cpp RobotomyRequestForm.cpp PresidentialPardonForm.cpp
 
 HEADERS = Bureaucrat.hpp
 

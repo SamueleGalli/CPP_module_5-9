@@ -13,14 +13,16 @@ class   ShrubberyCreationForm : public AForm
     public:
     //constructor
     ShrubberyCreationForm();
+
+    //copy constructor
+    ShrubberyCreationForm(ShrubberyCreationForm const &copy);
+
     //target for working directory
     virtual void    execute(Bureaucrat const & executor) const;
     
     //target for RobotomyRequestForm
     ShrubberyCreationForm(char const *target);
 
-    //copy constructor
-    ShrubberyCreationForm(ShrubberyCreationForm const &copy);
 
     //copy assignment operator
     ShrubberyCreationForm   &operator=(ShrubberyCreationForm const &scf);

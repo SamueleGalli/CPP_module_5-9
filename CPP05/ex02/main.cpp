@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 10:16:51 by sgalli            #+#    #+#             */
-/*   Updated: 2024/05/09 14:46:10 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/05/13 15:00:26 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,11 @@ int main()
   PresidentialPardonForm ppf("Pluto");
   RobotomyRequestForm rrf("topolino");
   ShrubberyCreationForm scf("mario");
-    
-    std::cout << "first form(PresidentialPardonForm)\n-----------------------------------------" << std::endl;
+  
+  std::cout << "<Form 1>\n" << ppf << std::endl;
+  std::cout << "<Form 2>\n" << rrf << std::endl;
+  std::cout << "<Form 3>\n" << scf << std::endl;
+  std::cout << "first form(PresidentialPardonForm)\n-----------------------------------------" << std::endl;
     b.signForm(ppf);
     std::cout << "\n-----------------------------------------" << std::endl;
     ppf.beSigned(b);

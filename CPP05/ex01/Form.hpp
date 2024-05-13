@@ -42,5 +42,7 @@ class Form
         //destructor
         ~Form();
 };
+//overload operator <<
+std::ostream    &operator<<(std::ostream &out, Form &F);
 
 #endif

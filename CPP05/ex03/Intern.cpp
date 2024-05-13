@@ -36,7 +36,6 @@ AForm   *Intern::makeForm(std::string name_form, char const *target)
         }
     }
     std::cout << "Error: Intern cannot create " << name_form << std::endl;
-
     for (int i = 0; i < 3; i++)
         delete Form[i];
     return (NULL);

@@ -52,4 +52,6 @@ class AForm
         virtual ~AForm();
 };
 
+std::ostream    &operator<<(std::ostream &out, AForm &F);
+
 #endif

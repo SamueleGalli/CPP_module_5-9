@@ -10,14 +10,14 @@ class   RobotomyRequestForm : public AForm
     //constructor
     RobotomyRequestForm();
 
+    //copy constructor
+    RobotomyRequestForm(RobotomyRequestForm const &copy);
+    
     //robotomizing
     virtual void    execute(Bureaucrat const & executor) const;
     
     //target for RobotomyRequestForm
     RobotomyRequestForm(char const *target);
-
-    //copy constructor
-    RobotomyRequestForm(RobotomyRequestForm const &copy);
 
     //copy assignment operator
     RobotomyRequestForm   &operator=(RobotomyRequestForm const &rrf);

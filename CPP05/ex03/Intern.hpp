@@ -13,7 +13,7 @@ class   Intern : public AForm
     public:
     //constructor
     Intern();
-    //copy constructo
+    //copy constructor
     Intern(const Intern &copy);
 
     //copy assignment operator

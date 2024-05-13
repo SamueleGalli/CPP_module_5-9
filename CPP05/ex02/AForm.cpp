@@ -145,3 +145,10 @@ int   AForm::getGradeToExecute(void) const
 AForm::~AForm()
 {
 }
+
+//overload operator <<
+std::ostream    &operator<<(std::ostream &out, AForm &F)
+{
+    out << "Form: " << F.getName() << "\ngrade to execute: " << F.getGradeToExecute() << "\ngrade to sign: " << F.getGradeToSign() << std::endl;
+    return out;
+}

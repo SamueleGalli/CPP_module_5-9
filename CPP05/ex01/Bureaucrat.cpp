@@ -114,13 +114,10 @@ void    Bureaucrat::signForm(Form &f)
         std::cout << "invalid Form value to be shown" << std::endl;
         return ;
     }
-    std::cout << "|Form : (" << f.getName() << ")|" << std::endl;
     if (f.getSign() == true)
-        std::cout << "|Sign : (is signed" << ")|" << std::endl;
+        std::cout << name << " signed" << f.getName() << std::endl;
     else
-        std::cout << "|Sign : (is not signed" << ")|" << std::endl;
-    std::cout << "|Grade to sign : ("  << f.getGradeToSign() << ")|" << std::endl;
-    std::cout << "|Grade to execute : (" << f.getGradeToExecute() << ")|" << std::endl;
+        std::cout << name << " couldn't sign " << f.getName() << " because first you need to sign it" << std::endl;
 }
 
 //destructor
