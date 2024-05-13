@@ -49,7 +49,7 @@ class AForm
         virtual void    execute(Bureaucrat const & executor) const = 0;
 
         //destructor
-        ~AForm();
+        virtual ~AForm();
 };
 
 #endif

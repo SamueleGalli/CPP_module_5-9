@@ -20,7 +20,7 @@ class   Intern : public AForm
     Intern &operator=(Intern const &I);
 
     //making Form
-    AForm   *makeForm(std::string name_form, std::string target);
+    AForm   *makeForm(std::string name_form, char const *target);
     
 
     //executing Form

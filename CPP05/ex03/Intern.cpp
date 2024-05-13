@@ -20,21 +20,32 @@ Intern  &Intern::operator=(Intern const &I)
 }
 
 //Making Form
-AForm   *Intern::makeForm(std::string name_form, std::string target)
+AForm   *Intern::makeForm(std::string name_form, char const *target)
 {
-    std::string FormB[] = {std::string("shrubbery sreation"), std::string("robotomy request"), std::string("presidential pardon")}; 
-    AForm   *Form[] = {new ShrubberyCreationForm(target), new RobotomyRequestForm(target), PresidentialPardonForm(target)};
+    std::string FormB[] = {std::string("shrubbery creation"), std::string("robotomy request"), std::string("presidential pardon")}; 
+    AForm   *Form[] = {new ShrubberyCreationForm(target), new RobotomyRequestForm(target), new PresidentialPardonForm(target)};
     for (int i = 0; i < 3; i++)
     {
         if (name_form == FormB[i])
         {
+            AForm *singleForm = Form[i];
             std::cout << "Intern creates " << FormB[i] << std::endl;
-            return (Form[i]);
+            for (int i = 0; i < 3; i++)
+                delete Form[i];
+            return (singleForm);
         }
     }
-    std::cout << "Error :Intern cannot create " << name_form << std::endl;
+    std::cout << "Error: Intern cannot create " << name_form << std::endl;
+
+    for (int i = 0; i < 3; i++)
+        delete Form[i];
+    return (NULL);
 }
 
+void    Intern::execute(Bureaucrat const & executor) const
+{
+    (void)executor;
+}
 
 //destructor
 Intern::~Intern()
