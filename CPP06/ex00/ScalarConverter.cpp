@@ -56,7 +56,7 @@ int ToInt(std::string const &input)
     {
         r = r * 10 + (input[i] - '0');
         if (input[i] == '.' || input[i] == 'f')
-            i++;
+            break ;
     }
     return (r * sign);
 }
@@ -74,7 +74,6 @@ float ToFloat(std::string const &input)
     }
     for(; i < input.size() && input[i] != '.'; ++i)
         r = r * 10.0f + (input[i] - '0');
-    
     if (i < input.size())
     {
         float   fraction = 0.1f;
@@ -101,7 +100,6 @@ double ToDouble(std::string const &input)
     }
     for(; i < input.size() && input[i] != '.'; ++i)
         r = r * 10.0 + (input[i] - '0');
-    
     if (i < input.size())
     {
         double   fraction = 0.1;
@@ -136,6 +134,12 @@ int CheckNumber(std::string const &input)
     }
     return (1);
 }
+
+char    ToChar(std::string const &input)
+{
+    return(input[0]);
+}
+
 //metodo di conversione
 void ScalarConverter::convert(std::string const &input)
 {
@@ -143,11 +147,16 @@ void ScalarConverter::convert(std::string const &input)
         return ;
     else
     {
-        char    c = input[0];
+        int valider = 1;
+        int num = ToInt(input);
+        std::cout << "num: " << num << std::endl;
+        if (num > 176 || num < 1 || (num > 6 && num < 32))
+            valider = 0;
+        char    c = ToChar(input);
         int     i = ToInt(input); 
         float   f = ToFloat(input);
         double  d = ToDouble(input);
-        if (CheckNumber(input) == 0)
+        if (valider == 0)
             std::cout << "char: Non displayable" << std::endl;
         else
             std::cout << "char: '" << c << "'" << std::endl;
