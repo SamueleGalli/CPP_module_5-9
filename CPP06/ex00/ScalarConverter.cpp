@@ -1,186 +1,258 @@
 #include "ScalarConverter.hpp"
+
 //costruttore di default
 ScalarConverter::ScalarConverter()
 {
 }
 
-ScalarConverter::ScalarConverter(ScalarConverter const &copy)
+//int converter
+int	convert_to_int(std::string const &input)
 {
-    if (this != &copy)
-        *this = copy;
+	int		r;
+	int		sign;
+	size_t	i;
+
+	r = 0;
+	sign = 1;
+	i = 0;
+	if (input[0] == '-')
+	{
+		sign = -1;
+		i++;
+	}
+	for (; i < input.size(); ++i)
+	{
+		if (input[i] == '.')
+			break ;
+		r = r * 10 + (input[i] - '0');
+	}
+	r = r * sign;
+	return (r);
 }
 
-int check_error(std::string const &input)
+int	CheckNumber(std::string const &input)
 {
-    if (input == "nan" || input == "nanf")
+	int		sign;
+	size_t	i;
+
+	sign = 0;
+	i = 0;
+	if (input[i] == '-')
+		i++;
+	for (; i < input.size(); i++)
+	{
+        if (input[i] >= '0' && input[i] <= '9')
+            continue;
+        else if (input[i] == 'f' || input[i] == '.')
+            continue;
+        return (0);
+	}
+	return (1);
+}
+
+int	CheckString(std::string const &input)
+{
+	int		sign;
+	size_t	i;
+
+	sign = 0;
+	i = 0;
+	if (input[i] == '-')
+		i++;
+	for (; i < input.size(); i++)
+	{
+		if (input[i] >= '0' && input[i] <= '9')
+			return (0);
+        else
+            i++;
+	}
+	return (1);
+}
+
+ScalarConverter::ScalarConverter(ScalarConverter const &copy)
+{
+	if (this != &copy)
+		*this = copy;
+}
+
+int	check_error(std::string const &input)
+{
+	if (input == "nan" || input == "nanf")
+	{
+		std::cout << "char: impossible" << std::endl;
+		std::cout << "int: impossible" << std::endl;
+		std::cout << "float: nanf" << std::endl;
+		std::cout << "double: nan" << std::endl;
+		return (1);
+	}
+	else if (input == "+inf" || input == "+inff")
+	{
+		std::cout << "char: impossible" << std::endl;
+		std::cout << "int: impossible" << std::endl;
+		std::cout << "float: +inff" << std::endl;
+		std::cout << "double: +inf" << std::endl;
+		return (1);
+	}
+	else if (input == "-inf" || input == "-inff")
+	{
+		std::cout << "char: impossible" << std::endl;
+		std::cout << "int: impossible" << std::endl;
+		std::cout << "float: -inff" << std::endl;
+		std::cout << "double: -inf" << std::endl;
+		return (1);
+	}
+	else if ((CheckNumber(input) == 0 && CheckString(input) == 0) || (input[input.size() - 1] == '.'))
     {
-        std::cout << "char: impossible" << std::endl;
-        std::cout << "int: impossible" << std::endl;
-        std::cout << "float: nanf" << std::endl;
-        std::cout << "double: nan" << std::endl;
-        return (1);
-    }
-    else if (input == "+inf" || input == "+inff")
-    {
-        std::cout << "char: impossible" << std::endl;
-        std::cout << "int: impossible" << std::endl;
-        std::cout << "float: +inff" << std::endl;
-        std::cout << "double: +inf" << std::endl;
-        return (1);
-    }
-    else if (input == "-inf" || input == "-inff")
-    {
-        std::cout << "char: impossible" << std::endl;
-        std::cout << "int: impossible" << std::endl;
-        std::cout << "float: -inff" << std::endl;
-        std::cout << "double: -inf" << std::endl;
-        return (1);
+        std::cout << "char: invalid char" << std::endl;
+		std::cout << "int: invalid int" << std::endl;
+		std::cout << "float: invalid float" << std::endl;
+		std::cout << "double: invalid double" << std::endl;
+		return (1);
     }
     else
         return (0);
 }
 
-int ToInt(std::string const &input)
+void	ToInt(std::string const &input)
 {
-    int r = 0;
-    int sign = 1;
-    size_t  i = 0;
+	int		r;
+	int		sign;
+	size_t	i;
 
-    //controllo valore negativo
-    if (input[0] == '-')
-    {
-        sign = -1;
-        i++;
-    }
-    for(; i < input.size(); ++i)
-    {
-        r = r * 10 + (input[i] - '0');
-        if (input[i] == '.' || input[i] == 'f')
-            break ;
-    }
-    return (r * sign);
+	r = 0;
+	sign = 1;
+	i = 0;
+	if (CheckNumber(input) == 0)
+	{
+		std::cout << "int: non displayble" << std::endl;
+		return ;
+	}
+    r = convert_to_int(input);
+	std::cout << "int: " << r << std::endl;
+	return ;
 }
-float ToFloat(std::string const &input)
-{
-    float r = 0.0f;
-    int sign = 1;
-    size_t  i = 0;
 
-    //controllo valore negativo
-    if (input[0] == '-')
+void	ToFloat(std::string const &input)
+{
+	if (CheckNumber(input) == 0)
+	{
+		std::cout << "float: non displayble" << std::endl;
+		return ;
+	}
+    int dies = 0;
+    for (size_t i = 0; i < input.size(); i++)
     {
-        sign = -1;
-        i++;
-    }
-    for(; i < input.size() && input[i] != '.'; ++i)
-        r = r * 10.0f + (input[i] - '0');
-    if (i < input.size())
-    {
-        float   fraction = 0.1f;
-        i++;
-        for(; i < input.size(); ++i)
+        if (input[i] == '.')
         {
-            r += (input[i] - '0') * fraction;
-            fraction *= 0.1f;
+            dies++;
+            break;
         }
     }
-    return (r * sign);
-}
-double ToDouble(std::string const &input)
-{
-    double r = 0.0;
-    int sign = 1;
-    size_t  i = 0;
-
-    //controllo valore negativo
-    if (input[0] == '-')
+    if (input[input.size() - 1] != 'f' && dies == 1)
     {
-        sign = -1;
-        i++;
+        std::cout << "float: " << input << "f" << std::endl;
     }
-    for(; i < input.size() && input[i] != '.'; ++i)
-        r = r * 10.0 + (input[i] - '0');
-    if (i < input.size())
+    else if (dies == 0)
     {
-        double   fraction = 0.1;
-        i++;
-        for(; i < input.size(); ++i)
-        {
-            r += (input[i] - '0') * fraction;
-            fraction *= 0.1;
-        }
+        std::cout << "float: " << input << ".0f" << std::endl;
     }
-    return (r * sign);
+    else
+    {
+        std::cout << "float: " << input << std::endl;
+    }
+	return ;
 }
 
-int CheckNumber(std::string const &input)
+void	ToDouble(std::string const &input)
 {
-    int sign = 0;
-    size_t i = 0;
-    if (input[i] == '-')
-        i++;
-    for (; i < input.size(); i++)
+	double	r;
+
+	r = 0.0;
+	if (CheckNumber(input) == 0)
+	{
+		std::cout << "double: non displayble" << std::endl;
+		return ;
+	}
+	int dies = 0;
+    for (size_t i = 0; i < input.size(); i++)
     {
-        if (input[i] > '0' && input[i] < '9')
-            i++;
-        else if (input[i] == '.' && sign == 0)
-        {
-            sign = 1;
-        }
-        else if (input[i] == 'f' && input[i + 1] == '\0')
-            return (1);
-        else
-            return (0);
+        if (input[i] == '.')
+		{
+			dies++;
+            break;
+		}
     }
-    return (1);
+    if (dies == 0)
+    {
+        std::cout << "double: " << input << ".0" << std::endl;
+    }
+    else
+    {
+		if (input[input.size() - 1] == 'f')
+			std::cout << "double: " << input.substr(0, input.size() - 1) << std::endl;
+		else
+    		std::cout << "double: " << input << std::endl;
+    }
+	return ;
 }
 
-char    ToChar(std::string const &input)
+void	ToChar(std::string const &input)
 {
-    return(input[0]);
+	char	c;
+	int		r;
+	int		overflow;
+	int		non_displyable;
+
+    if (input.size() == 1 && isdigit(input[0]) == 0)
+    {
+        std::cout << "char: '" << input << "'" << std::endl;
+        return ;
+    }
+    else if (input.size() > 1 && isdigit(input[0]) == 0)
+    {
+        std::cout << "char: invalid char" << std::endl;
+        return ;
+    }
+	r = convert_to_int(input);
+	overflow = 0;
+	non_displyable = 0;
+	if (r > 127 || r < -128)
+		overflow = 1;
+	else if (r < 32 || r == 127)
+		non_displyable = 1;
+	else
+		c = static_cast<char>(r);
+	if (overflow == 1)
+		std::cout << "char: overflow" << std::endl;
+	else if (non_displyable == 1)
+		std::cout << "char: non displayble" << std::endl;
+	else
+	{
+		c = static_cast<char>(r);
+		std::cout << "char: '" << c << "'" << std::endl;
+	}
 }
 
 //metodo di conversione
 void ScalarConverter::convert(std::string const &input)
 {
-    if (check_error(input) == 1)
-        return ;
-    else
-    {
-        int valider = 1;
-        int num = ToInt(input);
-        std::cout << "num: " << num << std::endl;
-        if (num > 176 || num < 1 || (num > 6 && num < 32))
-            valider = 0;
-        char    c = ToChar(input);
-        int     i = ToInt(input); 
-        float   f = ToFloat(input);
-        double  d = ToDouble(input);
-        if (valider == 0)
-            std::cout << "char: Non displayable" << std::endl;
-        else
-            std::cout << "char: '" << c << "'" << std::endl;
-        if (CheckNumber(input) == 1)
-            std::cout << "int: Non displayable" << std::endl;
-        else
-            std::cout << "int: " << i << std::endl;
-        if (CheckNumber(input) == 1)
-            std::cout << "float: Non displayable" << std::endl;
-        else
-            std::cout << "float: " << f << "f" << std::endl;
-        if (CheckNumber(input) == 1)
-            std::cout << "double: Non displayable" << std::endl;
-        else
-        std::cout << "double: " << d << std::endl;
-    }
+	if (check_error(input) == 1)
+		return ;
+	else
+	{
+		ToChar(input);
+		ToInt(input);
+		ToFloat(input);
+		ToDouble(input);
+	}
 }
 
 //operatore di assegnazione
 ScalarConverter &ScalarConverter::operator=(ScalarConverter const &copy)
 {
-    if (this != &copy)
-        *this = copy;
-    return *this;
+	if (this != &copy)
+		*this = copy;
+	return (*this);
 }
 
 //distruttore

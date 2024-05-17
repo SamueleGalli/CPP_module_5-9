@@ -3,10 +3,11 @@
 
 #include <iostream>
 #include <string>
+#include <cmath>
 
 class ScalarConverter
 {
-    public:
+    private:   
         //costruttore di default
         ScalarConverter();
         
@@ -16,11 +17,12 @@ class ScalarConverter
         //operatore di assegnazione
         ScalarConverter &operator=(ScalarConverter const &copy);
         
+        //distruttore
+        ~ScalarConverter();
+    public:
         //funzione conversione
         static void convert(std::string const &input);
         
-        //distruttore
-        ~ScalarConverter();
 };
 
 #endif
