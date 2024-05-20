@@ -32,10 +32,8 @@ int	convert_to_int(std::string const &input)
 
 int	CheckNumber(std::string const &input)
 {
-	int		sign;
 	size_t	i;
 
-	sign = 0;
 	i = 0;
 	if (input[i] == '-')
 		i++;
@@ -52,10 +50,8 @@ int	CheckNumber(std::string const &input)
 
 int	CheckString(std::string const &input)
 {
-	int		sign;
 	size_t	i;
 
-	sign = 0;
 	i = 0;
 	if (input[i] == '-')
 		i++;
@@ -116,12 +112,8 @@ int	check_error(std::string const &input)
 void	ToInt(std::string const &input)
 {
 	int		r;
-	int		sign;
-	size_t	i;
 
 	r = 0;
-	sign = 1;
-	i = 0;
 	if (CheckNumber(input) == 0)
 	{
 		std::cout << "int: non displayble" << std::endl;
@@ -165,9 +157,6 @@ void	ToFloat(std::string const &input)
 
 void	ToDouble(std::string const &input)
 {
-	double	r;
-
-	r = 0.0;
 	if (CheckNumber(input) == 0)
 	{
 		std::cout << "double: non displayble" << std::endl;
