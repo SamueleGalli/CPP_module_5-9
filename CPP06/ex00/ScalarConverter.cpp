@@ -239,8 +239,6 @@ void ScalarConverter::convert(std::string const &input)
 //operatore di assegnazione
 ScalarConverter &ScalarConverter::operator=(ScalarConverter const &copy)
 {
-	if (this != &copy)
-		*this = copy;
 	return (*this);
 }
 

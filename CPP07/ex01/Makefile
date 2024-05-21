@@ -4,9 +4,9 @@ CFLAGS= -Wall -Wextra -Werror -g -std=c++98
 
 SRC= main.cpp
 
-NAME= Start_with_a_few_functions
+NAME= Iter
 
-HEADERS= whatever.hpp
+HEADERS= iter.hpp
 
 OBJ = $(SRC:.cpp=.o)
 

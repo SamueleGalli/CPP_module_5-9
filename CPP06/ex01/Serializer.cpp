@@ -22,8 +22,6 @@ Serializer::Serializer(Serializer const &copy)
 
 Serializer &Serializer::operator=(Serializer const &copy)
 {
-    if (this != &copy)
-        *this = copy;
     return (*this);
 }
 
