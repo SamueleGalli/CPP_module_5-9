@@ -22,7 +22,8 @@ Serializer::Serializer(Serializer const &copy)
 
 Serializer &Serializer::operator=(Serializer const &copy)
 {
-    return (*this);
+	(void)copy;
+    	return (*this);
 }
 
 Serializer::~Serializer()
