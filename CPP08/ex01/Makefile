@@ -2,11 +2,11 @@ CPLUSPLUS = c++
 
 CFLAGS= -Wall -Wextra -Werror -g -std=c++98
 
-SRC= main.cpp
+SRC= main.cpp Span.cpp
 
-NAME= Easy_find
+NAME= Span
 
-HEADERS= easyfind.hpp
+HEADERS= Span.hpp
 
 OBJ = $(SRC:.cpp=.o)
 
