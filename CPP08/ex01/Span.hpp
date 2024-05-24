@@ -4,11 +4,13 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <climits>
 class Span
 {
     private:
         std::vector<int> vec;
-        unsigned int size
+        unsigned int size;
+        unsigned int first;
     public:
         //costruttore
         Span();
