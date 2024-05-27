@@ -59,13 +59,15 @@ int Span::shortestSpan()
         throw std::logic_error("Span is empty or have only 1 element");
         return (0);
     }
-    //elemento massimo (INT_MAX)
+    //ordino i numeri
+    std::sort(vec.begin(), vec.end());
+    //prendo il numero piu grande possibile
     int min = INT_MAX;
-    //associo a it il primo elemento del vettore castandolo a int
-    for (std::vector<int>::iterator it = vec.begin(); it != vec.end(); it++)
+    for (size_t i = 1; i < vec.size(); i++)
     {
-        if (*it < min)
-            min = *it;
+        int span = vec[i] - vec[i - 1];
+        if (span < min)
+            min = span;
     }
     return (min);
 }
