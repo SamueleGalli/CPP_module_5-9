@@ -96,7 +96,7 @@ void    AForm::InvalidSignException(void) const
 
 //sign
 
-void AForm::beSigned(Bureaucrat &b) const
+void AForm::beSigned(const Bureaucrat &b)
 {
     if (this->grade_to_sign > 150 || this->grade_to_sign < 1 || this->grade_to_execute > 150 || this->grade_to_execute < 1)
     {

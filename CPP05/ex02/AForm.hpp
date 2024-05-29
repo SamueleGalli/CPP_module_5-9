@@ -12,7 +12,7 @@ class Bureaucrat;
 class AForm
 {
     private:
-        mutable bool        sign;
+        bool        sign;
         const int   grade_to_sign;
         const int   grade_to_execute;
         char const  *name;
@@ -35,7 +35,7 @@ class AForm
 
         
         //sign
-        void  beSigned(Bureaucrat &b) const;
+        void  beSigned(Bureaucrat &b);
         
         //getting
         char const  *getName(void) const;

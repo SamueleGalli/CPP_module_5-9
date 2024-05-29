@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/27 10:16:51 by sgalli            #+#    #+#             */
-/*   Updated: 2024/05/13 10:57:46 by sgalli           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "Bureaucrat.hpp"
 #include "AForm.hpp"
 #include "PresidentialPardonForm.hpp"
@@ -24,5 +12,41 @@ int main()
     rrf = someRandomIntern.makeForm("shrubbery creation", "Bender");
     rrf = someRandomIntern.makeForm("presidential pardon", "Bender");
     rrf = someRandomIntern.makeForm("paperino", "Bender");
-
 }
+/*
+int main() {
+    Intern someRandomIntern;
+    AForm* rrf;
+    rrf = someRandomIntern.makeForm("Robotomy Request", "Bender");
+    if (rrf)
+    {
+        rrf->beSigned(Bureaucrat("John", 4));
+        rrf->execute(Bureaucrat("John", 4));
+        delete rrf;
+    }
+    rrf = someRandomIntern.makeForm("Shrubbery Creation", "Bender");
+    if (rrf)
+    {
+        rrf->beSigned(Bureaucrat("John", 4));
+        rrf->execute(Bureaucrat("John", 4));
+        delete rrf;
+    }
+    rrf = someRandomIntern.makeForm("Presidential Pardon", "Bender");
+    if (rrf)
+    {
+        rrf->beSigned(Bureaucrat("John", 4));
+        rrf->execute(Bureaucrat("John", 4));
+        delete rrf;
+    }
+    rrf = someRandomIntern.makeForm("paperino", "Bender");
+    if (rrf)
+    {
+        rrf->beSigned(Bureaucrat("John", 4));
+        rrf->execute(Bureaucrat("John", 4));
+        delete rrf;
+    }
+    else
+        std::cout << "Form creation failed, rrf is NULL." << std::endl;
+    return 0;
+}
+*/

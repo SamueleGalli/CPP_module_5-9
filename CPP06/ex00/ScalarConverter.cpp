@@ -192,6 +192,11 @@ void	ToChar(std::string const &input)
 	int		overflow;
 	int		non_displyable;
 
+	if (input.size() == 3 && input[0]  == '\'' && input[2] == '\'')
+	{
+		std::cout << "char: '" << input[1] << "'" << std::endl;
+		return ;
+	}
     if (input.size() == 1 && isdigit(input[0]) == 0)
     {
         std::cout << "char: '" << input << "'" << std::endl;
