@@ -10,7 +10,7 @@ Array<T>::Array()
 template <typename T>
 Array<T>::Array(unsigned int n)
 {
-    data = new T[n];
+    data = new T[n]();
     dimension = n;
 }
 
