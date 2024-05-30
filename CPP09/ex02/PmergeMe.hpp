@@ -6,6 +6,10 @@
 #include <cctype>
 #include <cstring>
 #include <algorithm>
+//conteinre che uso
+#include <vector>
+#include <deque>
+//calcolatore tempo
 
 class Pmergeme
 {
