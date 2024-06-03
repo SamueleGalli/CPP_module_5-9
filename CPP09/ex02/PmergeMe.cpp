@@ -53,28 +53,24 @@ int check_error(char **v, int c)
     return (1);
 }
 
-
 // valori disapri tipo 3 5 9 7 4 ma anche pari duplica valore e cancella altri
 template <typename T>
 void    insertionsort(T &vectoring, int start, int end)
 {
     // Itero dall'inizio (start + 1) fino alla fine (end)
-    int i = start + 1;
-    if (i <= end)
+    for (int i = start + 1; i <= end; ++i)
     {
         // Ottengo l'elemento corrente
         char *key = vectoring[i];
         int j = i - 1;
 
-        std::cout << atoi(vectoring[i]) << " < " << atoi(key) << std::endl;
         // Ciclo finché non raggiungo l'inizio dell'array o trovo un elemento minore di key
-        if (std::atoi(vectoring[j]) > std::atoi(key))
+        while (j >= start && std::atoi(vectoring[j]) > std::atoi(key))
         {
             // Sposto gli elementi maggiori di key a destra
             vectoring[j + 1] = vectoring[j];
             --j;
         }
-
         // Inserisco key nella sua posizione corretta
         vectoring[j + 1] = key;
     }
@@ -107,14 +103,13 @@ void    merge(T &vectoring, int start, int middle, int end)
         if (std::atoi(L[i]) <= std::atoi(R[j]))
         {
             //copio l'elemento di sinistra nel vettore che sto creando
-            vectoring[k] = L[i++];
+            vectoring[k++] = L[i++];
         }
         else
         {
             //copio l'elemento di destra nel vettore che sto creando
-            vectoring[k] = R[j++];
+            vectoring[k++] = R[j++];
         }
-        k++;
     }
     //copio i valori residui
     while (i < num1)
@@ -129,7 +124,7 @@ template <typename T>
 void    mergesortinsert(T &vectoring, int start, int end)
 {
     //se sono a 2 elementi li ordino
-    if ((end - start) + 1 < 2)
+    if ((end - start) + 1 <= 5)
         insertionsort(vectoring, start, end);
     else
     {
@@ -147,43 +142,50 @@ void    mergesortinsert(T &vectoring, int start, int end)
     }
 }
 
+void resize_vector(std::vector<char *> &vectoring, int c)
+{
+    std::vector<char *> temp(c - 1);
+    for (int i = 1; i < c; ++i)
+        temp[i - 1] = vectoring[i];
+    for (int i = 0; i < c - 1; ++i)
+        vectoring[i] = temp[i];
+    vectoring.resize(c - 1);
+}
+
+void resize_deque(std::deque<char *> &dequeing, int c)
+{
+    std::deque<char *> temp(c - 1);
+    for (int i = 1; i < c; ++i)
+        temp[i - 1] = dequeing[i];
+    for (int i = 0; i < c - 1; ++i)
+        dequeing[i] = temp[i];
+    dequeing.resize(c - 1);
+}
+
 void    sorting(char **v, int c)
 {
-    //parto da 1 cosi da evitare il programma
-    //evito la fine dell'array con v[c - 1]
-
-    //tolgo il programma dal sorting
-    for (int i = 1; i < c; ++i)
-        v[i - 1] = v[i];
     std::vector<char *> vectoring(v, v + c);
     std::deque<char *> dequeing(v, v + c);
-    mergesortinsert(vectoring, 0, vectoring.size() - 1);
-    mergesortinsert(dequeing, 0, dequeing.size() - 1);
-    
-    std::cout << "\nAfter:  ";
-    int i = 0;
-    for (std::vector<char *>::iterator it = vectoring.begin(); it != vectoring.end(); it++)
-    {
-        if (i == 0)
-        {
-            i++;
-            continue;
-        }
-        std::cout << *it << " ";
-    }
+    resize_vector(vectoring, c);
+    resize_deque(dequeing, c);
 
-    std::cout << "\nAfter:  ";
-    i = 0;
-    for (std::deque<char *>::iterator it = dequeing.begin(); it != dequeing.end(); it++)
-    {
-        if (i == 0)
-        {
-            i++;
-            continue;
-        }
+    //prendo il tempo di ora
+    std::clock_t start_vector = std::clock();
+    mergesortinsert(vectoring, 0, vectoring.size() - 1);
+    //converto in double per la precisione e ottengo la differenza tra tempo di ora con quello di inizo e lo divido per i clock della CPU a deque e vector 
+    double elapsed_vector = static_cast<double>(std::clock() - start_vector) / CLOCKS_PER_SEC;
+  
+    std::clock_t start_deque = std::clock();
+    mergesortinsert(dequeing, 0, dequeing.size() - 1);
+    double elapsed_deque = static_cast<double>(std::clock() - start_deque) / CLOCKS_PER_SEC;
+    
+    std::cout << "After:  ";
+    for (std::vector<char *>::iterator it = vectoring.begin(); it != vectoring.end(); it++)
         std::cout << *it << " ";
-    }
     std::cout << std::endl;
+    
+    std::cout << "Time to process a range of " << c - 1 << " elements with std::vector : " << elapsed_vector << " us" << std::endl;
+    std::cout << "Time to process a range of " << c - 1 << " elements with std::deque : " << elapsed_deque << " us" << std::endl;
 }
 
 void    Pmergeme::shorter(char **v, int c)

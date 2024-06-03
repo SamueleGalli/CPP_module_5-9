@@ -10,7 +10,7 @@
 #include <vector>
 #include <deque>
 //calcolatore tempo
-
+#include <ctime>
 class Pmergeme
 {
     public:
