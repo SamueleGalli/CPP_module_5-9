@@ -124,7 +124,7 @@ template <typename T>
 void    mergesortinsert(T &vectoring, int start, int end)
 {
     //se sono a 2 elementi li ordino
-    if ((end - start) + 1 <= 5)
+    if ((end - start) + 1 <= 10)
         insertionsort(vectoring, start, end);
     else
     {

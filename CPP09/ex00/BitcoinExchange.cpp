@@ -95,6 +95,8 @@ void    BitcoinExchange::exchanging(std::ifstream &filename)
         std::stringstream ss(line);
         //std::cout << "Contenuto dello stringstream ss: (" << ss.str() << ")" <<  std::endl;
         //cerca data e value nel file
+        if (line.empty())
+            continue ;
         if (ss >> date && ss.ignore(std::numeric_limits<std::streamsize>::max(), '|') && ss >> value)
             shorter_exchange(date, value);
         else if (i == 0)
