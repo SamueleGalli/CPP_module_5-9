@@ -8,13 +8,16 @@
 #include <stdexcept>
 //per ss() e altro
 #include <sstream>
+#include <cstring>
 #include <string>
+#include <cstdlib>
 #include <limits>
 class   BitcoinExchange
 {
     private:
         std::map<std::string, float > bitcoin;
     public:
+        bool    is_valid;
         //constructor
         BitcoinExchange();
         BitcoinExchange(const BitcoinExchange &btc);

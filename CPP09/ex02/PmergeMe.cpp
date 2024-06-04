@@ -172,18 +172,20 @@ void    sorting(char **v, int c)
     //prendo il tempo di ora
     std::clock_t start_vector = std::clock();
     mergesortinsert(vectoring, 0, vectoring.size() - 1);
+    double end_vector = std::clock();
     //converto in double per la precisione e ottengo la differenza tra tempo di ora con quello di inizo e lo divido per i clock della CPU a deque e vector 
-    double elapsed_vector = static_cast<double>(std::clock() - start_vector) / CLOCKS_PER_SEC;
+    double elapsed_vector = (end_vector - start_vector) / CLOCKS_PER_SEC * 100.0;
   
     std::clock_t start_deque = std::clock();
     mergesortinsert(dequeing, 0, dequeing.size() - 1);
-    double elapsed_deque = static_cast<double>(std::clock() - start_deque) / CLOCKS_PER_SEC;
+    double end_deque = std::clock();
+    double elapsed_deque = (end_deque- start_deque) / CLOCKS_PER_SEC * 100.0;
     
     std::cout << "After:  ";
     for (std::vector<char *>::iterator it = vectoring.begin(); it != vectoring.end(); it++)
         std::cout << *it << " ";
     std::cout << std::endl;
-    
+  
     std::cout << "Time to process a range of " << c - 1 << " elements with std::vector : " << elapsed_vector << " us" << std::endl;
     std::cout << "Time to process a range of " << c - 1 << " elements with std::deque : " << elapsed_deque << " us" << std::endl;
 }

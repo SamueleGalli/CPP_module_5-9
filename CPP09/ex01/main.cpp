@@ -6,9 +6,9 @@ int main(int c, char **v)
     {
         RPN rpn;
         int result = rpn.reverse_polish_notation(v[1]);
-        if (result == 0)
+        if (rpn.is_valid == 1)
             return (1);
-        std::cout << "the result is =" << result << std::endl;
+        std::cout << "the result is = " << result << std::endl;
     }
     else
         std::cout << "invalid argument" << std::endl;

@@ -10,6 +10,7 @@
 class RPN
 {
     public:
+        bool    is_valid;
         //constructor
         RPN();
         RPN(const RPN &copy);

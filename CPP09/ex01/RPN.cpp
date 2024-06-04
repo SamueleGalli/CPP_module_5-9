@@ -26,6 +26,7 @@ RPN     &RPN::operator=(const RPN &copy)
 
 double    RPN::reverse_polish_notation(char *v)
 {
+    is_valid = 0;
     std::stack<double>  rpn;
     //suddivido la stringa in per sazi
     char    *point = std::strtok(v, " ");
@@ -55,6 +56,7 @@ double    RPN::reverse_polish_notation(char *v)
         else
         {
             std::cout << "Error: invalid input" << std::endl;
+            is_valid = 1;
             return (0);
         }
         point = std::strtok(0, " ");

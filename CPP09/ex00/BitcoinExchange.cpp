@@ -14,8 +14,50 @@ BitcoinExchange::BitcoinExchange(const BitcoinExchange &btc)
 }
 
 //function
+
+int    finded_invalid_char(std::string line)
+{
+    int comma = 0;
+    if (line[4] != '-' && line[7] != '-')
+        return (1);
+    for (size_t i = 0; i < line.size(); i++)
+    {
+        if (comma == 0 && line[i] == ',')
+        {
+            comma = i;
+            break ;
+        }
+        if ((i != 4 && i != 7) && (line[i] < '0' || line[i] > '9'))
+            return (1);
+    }
+    int year = std::atoi(line.substr(0, 4).c_str());
+    int month = std::atoi(line.substr(5, 2).c_str());
+    int day = std::atoi(line.substr(8, 2).c_str());
+    //controllo se e un anno bisestile in caso rendo l'1 a 29 giorni
+    if (month < 1 || month > 12 || day < 1 )
+        return (1);
+    int month_daily[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0)
+        month_daily[1] = 29;
+    if (day > month_daily[month - 1])
+        return (1);
+    size_t i = ++comma;
+    int character = 0;
+    for (; i < line.size(); i++)
+    {
+        if (line[i] != ' ' && line[i] != '\n' && line[i] != '.' && (line[i] < '0' || line[i] > '9'))
+            return (1);
+        if (line[i] >= '0' && line[i] <= '9')
+            character++;
+    }
+    if (character == 0)
+        return (1);
+    return (0);
+}
+
 void    BitcoinExchange::get_map_bitcoin(std::ifstream &file)
 {
+    is_valid = 0;
     std::string    l;
     double        price;
     if (file.is_open() == 1)
@@ -28,8 +70,19 @@ void    BitcoinExchange::get_map_bitcoin(std::ifstream &file)
             std::string     date;
             //legge la stringa ss fino al punto e virgola e memorizza cio in date
             //cerca di memorizzare un valore numerico da ss e lo butta in price
+            if (l != "date,exchange_rate" && (l.empty() || finded_invalid_char(l) == 1))
+            {
+                std::cout << "Error: bad data.csv file invalid (" << l << ")" << std::endl;
+                is_valid = 1;
+                return ;
+            }
             while (std::getline(ss, date, ',') && ss >> price)
             {
+                if (price < 0)
+                {
+                    std::cout << "Error: bad data.csv file" << std::endl;
+                    is_valid = 1;
+                }
                 //utilizza sintassi data/price (chiave/prezzo) usi data per ottenere il prezzo
                 bitcoin[date] = price;
             }
@@ -71,7 +124,7 @@ void    BitcoinExchange::shorter_exchange(std::string date, float value)
         std::cout << "Error: too large a number" << std::endl;
         return ;
     }
-    else if (date < "2009-01-02")
+    else if (date < bitcoin.begin()->first)
     {
         std::cout << "Error: too small date" << std::endl;
         return ;
