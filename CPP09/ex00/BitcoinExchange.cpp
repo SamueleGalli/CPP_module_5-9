@@ -132,6 +132,55 @@ void    BitcoinExchange::shorter_exchange(std::string date, float value)
     find_date_price(date, value);
 }
 
+int check_file_validation(std::string line)
+{
+    size_t i = 0;
+    int comma = 0;
+    if (line[4] != '-' || line[7] != '-' || line[10] != ' ')
+        return (1);
+    for (i = 0; i < 10 && line[i] != ' '; i++)
+    {
+        if (comma == 0 && line[i] == '|')
+        {
+            comma = i;
+            break ;
+        }
+        if ((i != 4 && i != 7) && (line[i] < '0' || line[i] > '9'))
+            return (1);
+    }
+    if (i < 10)
+    return (1);
+    int year = std::atoi(line.substr(0, 4).c_str());
+    int month = std::atoi(line.substr(5, 2).c_str());
+    int day = std::atoi(line.substr(8, 2).c_str());
+    //controllo se e un anno bisestile in caso rendo l'1 a 29 giorni
+    if (month < 1 || month > 12 || day < 1 )
+        return (1);
+    int month_daily[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0)
+        month_daily[1] = 29;
+    if (day > month_daily[month - 1])
+        return (1);
+    for (; line[i] != '|'; i++)
+    {
+    }
+    i++;
+    for (; line[i] != '\0' && line[i] == ' '; i++)
+    {
+    }
+    int character = 0;
+    for (; i < line.size(); i++)
+    {
+        if (line[i] != ' ' && line[i] != '\n' && line[i] != '.' && (line[i] < '0' || line[i] > '9'))
+            return (1);
+        if (line[i] >= '0' && line[i] <= '9')
+            character++;
+    }
+    if (character == 0)
+        return (1);
+    return (0);
+}
+
 void    BitcoinExchange::exchanging(std::ifstream &filename)
 {
     //leggere il file
@@ -150,7 +199,9 @@ void    BitcoinExchange::exchanging(std::ifstream &filename)
         //cerca data e value nel file
         if (line.empty())
             continue ;
-        if (ss >> date && ss.ignore(std::numeric_limits<std::streamsize>::max(), '|') && ss >> value)
+        if (i == 0 && check_file_validation(line) == 1)
+            std::cout << "Error: bad input => " << line << std::endl;
+        else if (ss >> date && ss.ignore(std::numeric_limits<std::streamsize>::max(), '|') && ss >> value)
             shorter_exchange(date, value);
         else if (i == 0)
             std::cout << "Error: bad input => " << line << std::endl;

@@ -24,10 +24,46 @@ RPN     &RPN::operator=(const RPN &copy)
 
 //methods
 
+int    num_point(char *v)
+{
+    int num = 0;
+    int point = 0;
+    for (int i = 0; v[i] != '\0'; i++)
+    {
+        while (v[i] == ' ')
+            i++;
+        while(std::isdigit(v[i]) != 0)
+        {
+            num++;
+            i++;
+            while (v[i] == ' ')
+                i++;
+        }
+        while (v[i] == '/' || v[i] == '*' || v[i] == '+' || v[i] == '-')
+        {
+            point++;
+            i++;
+            while (v[i] == ' ')
+                i++;
+        }
+        if (point > 0 && num > 0 && (point > num - 1 || num - 1 > point))
+            return (1);
+        num = 0;
+        point = 0;
+    }
+    return (0);
+}
+
 double    RPN::reverse_polish_notation(char *v)
 {
     is_valid = 0;
-    std::stack<double>  rpn;
+    if (num_point(v) == 1)
+    {
+        std::cout << "to many or to low signs" << std::endl;
+        is_valid = 1;
+        return (0);
+    }
+    std::stack<int>  rpn;
     //suddivido la stringa in per sazi
     char    *point = std::strtok(v, " ");
     while (point != NULL)
@@ -36,10 +72,17 @@ double    RPN::reverse_polish_notation(char *v)
         {
             if (rpn.size() >= 2 && (point[0] == '*' || point[0] == '/' || point[0] == '+' || point[0] == '-'))
             {
-                double first = rpn.top();
+                int first = rpn.top();
                 rpn.pop();
-                double second = rpn.top();
+                int second = rpn.top();
                 rpn.pop();
+                std::cout << "first = " << first << "\nsecond = " << second << std::endl;
+                if (first == 0 && point[0] == '/' && second > 0)
+                {
+                    std::cout << "can't divide by zero" << std::endl;
+                    is_valid = 1;
+                    return (0);
+                }
                 if (point[0] == '+')
                     rpn.push(first + second);
                 else if (point[0] == '-')
