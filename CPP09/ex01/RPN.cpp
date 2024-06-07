@@ -76,8 +76,7 @@ double    RPN::reverse_polish_notation(char *v)
                 rpn.pop();
                 int second = rpn.top();
                 rpn.pop();
-                std::cout << "first = " << first << "\nsecond = " << second << std::endl;
-                if (first == 0 && point[0] == '/' && second > 0)
+                if (first == 0 && point[0] == '/')
                 {
                     std::cout << "can't divide by zero" << std::endl;
                     is_valid = 1;
